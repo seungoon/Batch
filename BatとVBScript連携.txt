@@ -1,0 +1,38 @@
+
+①下記の内容をtest.vbsとして保存する。
+
+Option Explicit
+
+Const vbHide = 0 'ウィンドウを非表示
+
+Function ArgsToString()
+   Const DELIMITER = " "
+   Dim ret
+   Dim i
+   Dim n
+
+   ret = ""
+   n = Wscript.Arguments.Count
+   If n > 0 Then
+     For i = 1 To n
+       If i < n Then
+         ret = ret & Wscript.Arguments(i - 1) & DELIMITER
+       Else
+         ret = ret & Wscript.Arguments(i - 1)
+       End If
+     Next
+   End If
+   ArgsToString = ret
+End Function
+
+Dim batPath
+batPath = Replace(WScript.ScriptFullName,".vbs",".bat")
+
+CreateObject("Wscript.Shell").run "cmd /c " & batPath & " " & ArgsToString(), vbHide
+
+
+※使用手順：
+例えば、test.batを起動したい場合、test.batと同じフォルダに、上記内容をtest.vbsとして保存すれば、
+test.vbsを実行することで、test.batを非表示のまま起動することができる。
+また、起動時に引数を渡すことも可能。
+

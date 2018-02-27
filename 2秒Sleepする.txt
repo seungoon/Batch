@@ -1,0 +1,2 @@
+rem 2•bSleep‚·‚é
+timeout /T 2 /NOBREAK > nul
